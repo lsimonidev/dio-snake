@@ -14,21 +14,22 @@ food = {
 }
 
 let direction = "right";
+let score = 0;
 
 function createBG(){
-    context.fillStyle = "lightgreen";
+    context.fillStyle = "#FF9E0E";
     context.fillRect(0, 0, 16 * box, 16 * box);
 }
 
 function createSnake(){
     for (let i = 0; i < snake.length; i++) {
-        context.fillStyle = "green";
+        context.fillStyle = "#BDDA14";
         context.fillRect(snake[i].x, snake[i].y, box, box);        
     }
 }
 
 function drawFood(){
-    context.fillStyle = "red";
+    context.fillStyle = "#F86E1D";
     context.fillRect(food.x, food.y, box, box)
 }
 document.addEventListener('keydown', update);
@@ -51,7 +52,7 @@ function startGame(){
     {
         if (snake[0].x == snake[i].x && snake[0].y == snake[i].y){
             clearInterval(game);
-            alert('Game Over :(');
+            alert('Game Over :(\n Score:' + score);
         }
     }
 
@@ -72,13 +73,14 @@ function startGame(){
     } else {
         food.x = Math.floor(Math.random() * 15 +1) * box;
         food.y = Math.floor(Math.random() * 15 +1) * box;
+        score ++;
     }
 
     let newHead = {
         x: snakeX,
         y: snakeY
     }
-    snake.unshift(newHead); //método unshift adiciona como primeiro quadradinho da cobrinha
+    snake.unshift(newHead);
 }
 
 let game = setInterval(startGame, 100);
